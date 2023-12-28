@@ -1,15 +1,34 @@
-from flask import Flask
-from markupsafe import escape
+#!/usr/bin/python3
+"""Starts a Flask web application.
 
+The application listens on 0.0.0.0, port 5000.
+Routes:
+    /: Displays 'Hello HBNB!'.
+    /hbnb: Displays 'HBNB'.
+"""
+from flask import Flask
 
 app = Flask(__name__)
 
-ret = 'mama'
 
-@app.route("/home/<name>", strict_slashes=False)
-def Hbnb(name):
-    return name
+@app.route("/", strict_slashes=False)
+def hello_hbnb():
+    """Displays 'Hello HBNB!'."""
+    return "Hello HBNB!"
 
 
-if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Displays 'HBNB'."""
+    return "HBNB"
+
+@app.route("/c/<text>", strict_slashes=False)
+def C_text(text):
+     """Displays 'C followed by <text> variables' """
+     textt = text.replace("_"," ")
+     return f'C {textt}'
+        
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
